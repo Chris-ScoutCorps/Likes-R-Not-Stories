@@ -4,7 +4,7 @@ body {
 }
 
 .setting-row {
-    min-width: 200px;
+    white-space: nowrap;
 }
 .setting-row span {
     vertical-align: top;
