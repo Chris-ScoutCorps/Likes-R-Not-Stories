@@ -17,6 +17,12 @@
         "lib/jquery-3.2.1.min.js",
         "content.js"
       ]
+    },
+    {
+      "matches": ["*://*.amazon.com/*", "*://amazon.com/*"],
+      "js": [
+        "sites/amazon.js"
+      ]
     }
   ],
 
