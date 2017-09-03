@@ -1,0 +1,11 @@
+body {
+    background-color: #7da7d8;
+    color: #ffffff;
+}
+
+.setting-row {
+    min-width: 200px;
+}
+.setting-row span {
+    vertical-align: top;
+}
