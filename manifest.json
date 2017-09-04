@@ -27,6 +27,12 @@
       "js": [
         "sites/amazon.js"
       ]
+    },
+    {
+      "matches": ["*://*.facebook.com/*", "*://facebook.com/*"],
+      "js": [
+        "sites/facebook.js"
+      ]
     }
   ],
 
