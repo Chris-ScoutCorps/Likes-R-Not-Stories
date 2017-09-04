@@ -8,8 +8,8 @@ $(document).ready(() => {
   const settingKeys = toggles.toArray().map(x => $(x).attr('id'));
 
   chrome.storage.sync.get(settingKeys, function (settings) {
-    Object.keys(settings).forEach(x => {
-      $('#' + x).prop('checked', settings[x]);
+    settingKeys.forEach(x => {
+      $('#' + x).prop('checked', settings[x] !== false);
     });
   });
 
