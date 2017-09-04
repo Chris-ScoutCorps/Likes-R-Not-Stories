@@ -9,7 +9,7 @@ function likesAreNotStories() {
       return;
     $(post).data('likesAreNotStories-visited', true);
 
-    $(postHeadlineSelector, post[0]).toArray().forEach(headline => {
+    $(postHeadlineSelector, post).toArray().forEach(headline => {
       const copy = $(headline).clone();
       $('.fwb', copy[0]).remove();
       $('a', copy[0]).remove();
