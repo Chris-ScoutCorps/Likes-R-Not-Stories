@@ -13,7 +13,7 @@ function likesAreNotStories() {
       $('.fwb', copy[0]).remove();
       $('a', copy[0]).remove();
       const nut = $(copy).html().replace(/\./g, '').trim();
-      if (nut === 'liked this' || nut === 'likes') {
+      if (nut === 'liked this' || nut === 'likes' || nut === 'reacted to this' || nut.startsWith('liked this post from')) {
         const backup = $(headline).clone();
         $(post).css('padding', '2px');
         $(post).html('');
