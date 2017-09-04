@@ -31,6 +31,7 @@
     {
       "matches": ["*://*.facebook.com/*", "*://facebook.com/*"],
       "js": [
+        "util/aggregate.js",
         "sites/facebook.js"
       ]
     }
