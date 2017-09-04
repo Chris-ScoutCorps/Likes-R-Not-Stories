@@ -1,49 +1,24 @@
 {
   "manifest_version": 2,
 
-  "name": "Scout Corps Extension",
-  "description": "This is just me playing around with extensions...",
+  "name": "Likes are not Stories",
+  "description": "Removes 'X liked Y' stories from the Facebook news feed",
   "version": "1.0",
 
   "icons": {
     "128": "icon-square.png"
   },
 
-  "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "popup/index.html"
-  },
-
   "content_scripts": [
-    {
-      "matches": ["*://*/*"],
-      "js": [
-        "lib/jquery-3.2.1.min.js",
-        "content.js"
-      ]
-    },
-    {
-      "matches": ["*://*.amazon.com/*", "*://amazon.com/*"],
-      "js": [
-        "sites/amazon.js"
-      ]
-    },
     {
       "matches": ["*://*.facebook.com/*", "*://facebook.com/*"],
       "js": [
+        "lib/jquery-3.2.1.min.js",
         "util/aggregate.js",
         "sites/facebook.js"
       ]
     }
   ],
 
-  "permissions": [ "tabs", "debugger", "storage" ],
-
-  "background": {
-    "persistent": true,
-    "scripts": [
-      "lib/jquery-3.2.1.min.js",
-      "background.js"
-    ]
-  }
+  "permissions": [ "tabs", "debugger", "storage" ]
 }

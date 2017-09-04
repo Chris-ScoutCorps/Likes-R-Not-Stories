@@ -36,13 +36,8 @@ function likesAreNotStories() {
 }
 
 $(document).ready(() => {
-  chrome.storage.sync.get('enable-facebook', function (settings) {
-    if (settings['enable-facebook'] === false)
-      return;
 
     $.ScoutCorps.aggregate('likesAreNotStories', likesAreNotStories, 100);
     $(document).scroll(() => $.ScoutCorps.aggregate('likesAreNotStories', likesAreNotStories, 100));
-
-  });
 
 });
