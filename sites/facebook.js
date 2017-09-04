@@ -13,6 +13,7 @@ function likesAreNotStories() {
       const copy = $(headline).clone();
       $('.fwb', copy[0]).remove();
       $('a', copy[0]).remove();
+      $('i', copy[0]).remove();
       const nut = $(copy).html().replace(/\./g, '').trim();
       if (nut === 'liked this' || nut === 'likes' || nut === 'reacted to this' || nut.startsWith('liked this post from')) {
         const newPost = $(post).clone();
