@@ -17,7 +17,7 @@ function likesAreNotStories() {
       const nut = $(copy).html().replace(/\./g, '').trim();
       if (nut === 'liked this' || nut === 'likes' || nut === 'reacted to this' || nut.startsWith('liked this post from')) {
         const newPost = $(post).clone();
-        $(newPost).html('').css('padding', '2px');
+        $(newPost).html('').css('padding', '12px');
         $(newPost).data('likesAreNotStories-visited', true);
 
         const newHeadline = $(headline).clone();
