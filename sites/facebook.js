@@ -14,8 +14,8 @@ function likesAreNotStories() {
       $('.fwb', copy[0]).remove();
       $('a', copy[0]).remove();
       $('i', copy[0]).remove();
-      const nut = $(copy).html().replace(/\./g, '').trim();
-      if (nut === 'liked this' || nut === 'likes' || nut === 'reacted to this' || nut.startsWith('liked this post from')) {
+      const nut = $(copy).html().replace(/\./g, '').replace(/\,/g, '').trim();
+      if (nut === 'liked this' || nut === 'likes' || nut === 'and like' || nut === 'reacted to this' || nut.startsWith('liked this post from')) {
         const newPost = $(post).clone();
         $(newPost).html('').css('padding', '12px');
         $(newPost).data('likesAreNotStories-visited', true);
