@@ -18,7 +18,5 @@
         "sites/facebook.js"
       ]
     }
-  ],
-
-  "permissions": [ "tabs", "debugger", "storage" ]
+  ]
 }
