@@ -3,7 +3,7 @@
 const postContainerSelector = 'div.fbUserPost';
 const postHeadlineSelector = 'h5 .fwn.fcg>.fcg';
 
-function likesAreNotStories() {
+function likesAreNotStories(enabled) {
   $(postContainerSelector).toArray().forEach(post => {
     if ($(post).data('likesAreNotStories-visited'))
       return;
@@ -27,8 +27,17 @@ function likesAreNotStories() {
         $(newHeadline).append('<span> </span>').append(show);
         $(show).click(function () { $(post).show(); $(newPost).remove(); });
 
-        $(post).after(newPost);
-        $(post).hide();
+        if (enabled) {
+          $(post).after(newPost);
+          $(post).hide();
+        }
+        else {
+          const url = 'https://chrome.google.com/webstore/detail/pbnfaaobfjjbjodongekibfbgdlmdbmh';
+          const expMsg = $('<h5 style="padding-bottom: 5px;">'
+            + 'Likes are not Stories trial expired, <a href="' + url + '">head to the store to renew and hide this post.</a>'
+            + '</h5>');
+          $(headline).before(expMsg);
+        }
       }
     });
 
@@ -51,10 +60,8 @@ $(document).ready(() => {
       }
     }
 
-    if (enabled) {
-      $.ScoutCorps.aggregate('likesAreNotStories', likesAreNotStories, 100);
-      $(document).scroll(() => $.ScoutCorps.aggregate('likesAreNotStories', likesAreNotStories, 100));
-    }
+    $.ScoutCorps.aggregate('likesAreNotStories', likesAreNotStories(enabled), 100);
+    $(document).scroll(() => $.ScoutCorps.aggregate('likesAreNotStories', likesAreNotStories(enabled), 100));
 
   });
 
