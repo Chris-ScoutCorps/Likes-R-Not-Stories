@@ -37,7 +37,25 @@ function likesAreNotStories() {
 
 $(document).ready(() => {
 
-    $.ScoutCorps.aggregate('likesAreNotStories', likesAreNotStories, 100);
-    $(document).scroll(() => $.ScoutCorps.aggregate('likesAreNotStories', likesAreNotStories, 100));
+  chrome.storage.sync.get('license', function (settings) {
+    const license = settings.license;
+
+    var enabled = false;
+    if (license && license.accessLevel == "FULL") {
+      enabled = true;
+    } else if (license && license.accessLevel == "FREE_TRIAL") {
+      var daysAgoLicenseIssued = Date.now() - parseInt(license.createdTime, 10);
+      daysAgoLicenseIssued = daysAgoLicenseIssued / 1000 / 60 / 60 / 24;
+      if (daysAgoLicenseIssued <= 7) {
+        enabled = true;
+      }
+    }
+
+    if (enabled) {
+      $.ScoutCorps.aggregate('likesAreNotStories', likesAreNotStories, 100);
+      $(document).scroll(() => $.ScoutCorps.aggregate('likesAreNotStories', likesAreNotStories, 100));
+    }
+
+  });
 
 });

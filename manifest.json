@@ -3,10 +3,25 @@
 
   "name": "Likes are not Stories",
   "description": "Removes 'X liked Y' stories from the Facebook news feed",
-  "version": "1.0.1",
+  "version": "1.0.2",
 
   "icons": {
     "128": "icon128.png"
+  },
+
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAi5de4alzUD0A+e/BbHuY8bm1iF693Y/Ns8C3ZrBQXQ5kbe7VZQWg/srp/jMpIv3fgurWZBHNaHdbEwTyaNlUFfpBzNXyxNekB6kZHaZs57LHzjstbZCvMv9gaQBsf0ULaJicjZBcorK48mrxCJM1C+AnUoiV1PV1VwuGm+jjDw7LJRzcy8zy1c7jWfP45yB9qpOeoX/yBe6wxUs/Xgj7mmJ+UIDvlkcGXCa5ZvhXYVj51gyIHW1k+Zyq8ALYj9vNxUoiRlgBegnKGdOAElINLHU74fQKA/vkK2EFbYtxNEA8chztDGTMF98KH7Pq3TATTkyndRij7jXEURe35TDV4QIDAQAB",
+
+  "permissions": [
+    "identity",
+    "storage",
+    "https://www.googleapis.com/"
+  ],
+  "oauth2": {
+    "client_id": "70426960067-vp24q3ddk7ej6r6190t793ln6t8p9b01.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/plus.login",
+      "https://www.googleapis.com/auth/chromewebstore.readonly"
+    ]
   },
 
   "content_scripts": [
@@ -18,5 +33,12 @@
         "sites/facebook.js"
       ]
     }
-  ]
+  ],
+
+  "background": {
+    "scripts": [
+      "lib/jquery-3.2.1.min.js",
+      "background.js"
+    ]
+  }
 }
