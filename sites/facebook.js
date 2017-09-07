@@ -60,8 +60,8 @@ $(document).ready(() => {
       }
     }
 
-    $.ScoutCorps.aggregate('likesAreNotStories', likesAreNotStories(enabled), 100);
-    $(document).scroll(() => $.ScoutCorps.aggregate('likesAreNotStories', likesAreNotStories(enabled), 100));
+    $.ScoutCorps.aggregate('likesAreNotStories', () => likesAreNotStories(enabled), 100);
+    $(document).scroll(() => $.ScoutCorps.aggregate('likesAreNotStories', () => likesAreNotStories(enabled), 100));
 
   });
 
