@@ -3,7 +3,7 @@
 
   "name": "Likes are not Stories",
   "description": "Removes 'X liked Y' stories from the Facebook news feed",
-  "version": "1.0.3",
+  "version": "1.0.4",
 
   "icons": {
     "128": "icon128.png"
