@@ -1,10 +1,16 @@
 'use strict';
 
-const postContainerSelector = 'div.fbUserContent';
+const postContainerSelectors = ['div.fbUserContent', 'div.fbUserStory'];
 const postHeadlineSelector = 'h5 .fwn.fcg>.fcg';
 
 function likesAreNotStories(enabled) {
-  $(postContainerSelector).toArray().forEach(post => {
+  const allPostContainers = postContainerSelectors
+    .map(selector => $(selector).toArray())
+    .reduce((collector, item) => {
+      return collector.concat(item);
+    }, []);
+
+  allPostContainers.forEach(post => {
     if ($(post).data('likesAreNotStories-visited'))
       return;
     $(post).data('likesAreNotStories-visited', true);
