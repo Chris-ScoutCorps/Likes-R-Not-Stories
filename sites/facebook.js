@@ -1,6 +1,6 @@
 'use strict';
 
-const postContainerSelectors = ['div.fbUserContent', 'div.fbUserStory'];
+const postContainerSelectors = ['div.fbUserContent', 'div.fbUserStory', 'div.userContentWrapper'];
 const postHeadlineSelector = 'h5 .fwn.fcg>.fcg';
 
 function likesAreNotStories(enabled) {
