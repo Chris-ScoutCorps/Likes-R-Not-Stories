@@ -1,46 +1,41 @@
 {
   "manifest_version": 2,
 
-  "name": "Scout Corps Extension",
-  "description": "This is just me playing around with extensions...",
-  "version": "1.0",
+  "name": "Likes are not Stories",
+  "description": "Removes 'X liked Y' stories from the Facebook news feed",
+  "version": "1.0.6",
 
   "icons": {
-    "128": "icon-square.png"
+    "128": "icon128.png"
   },
 
-  "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "popup/index.html"
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAi5de4alzUD0A+e/BbHuY8bm1iF693Y/Ns8C3ZrBQXQ5kbe7VZQWg/srp/jMpIv3fgurWZBHNaHdbEwTyaNlUFfpBzNXyxNekB6kZHaZs57LHzjstbZCvMv9gaQBsf0ULaJicjZBcorK48mrxCJM1C+AnUoiV1PV1VwuGm+jjDw7LJRzcy8zy1c7jWfP45yB9qpOeoX/yBe6wxUs/Xgj7mmJ+UIDvlkcGXCa5ZvhXYVj51gyIHW1k+Zyq8ALYj9vNxUoiRlgBegnKGdOAElINLHU74fQKA/vkK2EFbYtxNEA8chztDGTMF98KH7Pq3TATTkyndRij7jXEURe35TDV4QIDAQAB",
+
+  "permissions": [
+    "identity",
+    "storage",
+    "https://www.googleapis.com/"
+  ],
+  "oauth2": {
+    "client_id": "70426960067-vp24q3ddk7ej6r6190t793ln6t8p9b01.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/plus.login",
+      "https://www.googleapis.com/auth/chromewebstore.readonly"
+    ]
   },
 
   "content_scripts": [
     {
-      "matches": ["*://*/*"],
-      "js": [
-        "lib/jquery-3.2.1.min.js",
-        "content.js"
-      ]
-    },
-    {
-      "matches": ["*://*.amazon.com/*", "*://amazon.com/*"],
-      "js": [
-        "sites/amazon.js"
-      ]
-    },
-    {
       "matches": ["*://*.facebook.com/*", "*://facebook.com/*"],
       "js": [
+        "lib/jquery-3.2.1.min.js",
         "util/aggregate.js",
         "sites/facebook.js"
       ]
     }
   ],
 
-  "permissions": [ "tabs", "debugger", "storage" ],
-
   "background": {
-    "persistent": true,
     "scripts": [
       "lib/jquery-3.2.1.min.js",
       "background.js"

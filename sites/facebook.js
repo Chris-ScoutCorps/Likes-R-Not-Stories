@@ -1,10 +1,16 @@
 'use strict';
 
-const postContainerSelector = 'div.fbUserPost';
+const postContainerSelectors = ['div.fbUserContent', 'div.fbUserStory', 'div.userContentWrapper'];
 const postHeadlineSelector = 'h5 .fwn.fcg>.fcg';
 
-function likesAreNotStories() {
-  $(postContainerSelector).toArray().forEach(post => {
+function likesAreNotStories(enabled) {
+  const allPostContainers = postContainerSelectors
+    .map(selector => $(selector).toArray())
+    .reduce((collector, item) => {
+      return collector.concat(item);
+    }, []);
+
+  allPostContainers.forEach(post => {
     if ($(post).data('likesAreNotStories-visited'))
       return;
     $(post).data('likesAreNotStories-visited', true);
@@ -27,8 +33,17 @@ function likesAreNotStories() {
         $(newHeadline).append('<span> </span>').append(show);
         $(show).click(function () { $(post).show(); $(newPost).remove(); });
 
-        $(post).after(newPost);
-        $(post).hide();
+        if (enabled) {
+          $(post).after(newPost);
+          $(post).hide();
+        }
+        else {
+          const url = 'https://chrome.google.com/webstore/detail/pbnfaaobfjjbjodongekibfbgdlmdbmh';
+          const expMsg = $('<h5 style="padding-bottom: 5px;">'
+            + 'Likes are not Stories trial expired, <a href="' + url + '">head to the store to renew and hide this post.</a>'
+            + '</h5>');
+          $(headline).before(expMsg);
+        }
       }
     });
 
@@ -36,12 +51,23 @@ function likesAreNotStories() {
 }
 
 $(document).ready(() => {
-  chrome.storage.sync.get('enable-facebook', function (settings) {
-    if (settings['enable-facebook'] === false)
-      return;
 
-    $.ScoutCorps.aggregate('likesAreNotStories', likesAreNotStories, 100);
-    $(document).scroll(() => $.ScoutCorps.aggregate('likesAreNotStories', likesAreNotStories, 100));
+  chrome.storage.sync.get('license', function (settings) {
+    const license = settings.license;
+
+    var enabled = false;
+    if (license && license.accessLevel == "FULL") {
+      enabled = true;
+    } else if (license && license.accessLevel == "FREE_TRIAL") {
+      var daysAgoLicenseIssued = Date.now() - parseInt(license.createdTime, 10);
+      daysAgoLicenseIssued = daysAgoLicenseIssued / 1000 / 60 / 60 / 24;
+      if (daysAgoLicenseIssued <= 7) {
+        enabled = true;
+      }
+    }
+
+    $.ScoutCorps.aggregate('likesAreNotStories', () => likesAreNotStories(enabled), 100);
+    $(document).scroll(() => $.ScoutCorps.aggregate('likesAreNotStories', () => likesAreNotStories(enabled), 100));
 
   });
 
